@@ -2,7 +2,11 @@ package com.example.proyectocloudfirestore;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -77,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
                                 if (!task.isSuccessful()) {
                                     Toast.makeText(MainActivity.this, "Authentication failed:" + task.getException(), Toast.LENGTH_SHORT).show();
                                 }
-                                // iniciarAplicacion(task.getResult().getUser().getEmail().split("@")[0]);
+                                else
+                                    iniciarIntent();
                             }
                         });
             }
@@ -95,11 +100,17 @@ public class MainActivity extends AppCompatActivity {
 
                                 if (task.isSuccessful()) {
                                     Toast.makeText(MainActivity.this, "Usuario creado", Toast.LENGTH_SHORT).show();
-                                    //iniciarAplicacion(task.getResult().getUser().getEmail().split("@")[0]);
+                                    iniciarIntent();
                                 } else  Toast.makeText(MainActivity.this, "Problemas al crear usuario" + task.getException(), Toast.LENGTH_LONG).show();
                             }
                         });
             }});
         //endregion
+    }
+
+    private void iniciarIntent()
+    {
+        Intent intent = new Intent(this, IntentPrincipal.class);
+        startActivity(intent);
     }
 }
