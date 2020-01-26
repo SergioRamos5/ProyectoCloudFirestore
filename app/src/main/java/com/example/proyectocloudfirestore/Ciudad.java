@@ -5,12 +5,12 @@ public class Ciudad {
     private String nombre;
     private String comunidad;
     private String pais;
-    private int poblacion;
+    private String poblacion;
 
     public Ciudad() {
     }
 
-    public Ciudad(String nombre, String comunidad, String pais, int poblacion) {
+    public Ciudad(String nombre, String comunidad, String pais, String poblacion) {
         this.nombre = nombre;
         this.comunidad = comunidad;
         this.pais = pais;
@@ -41,11 +41,11 @@ public class Ciudad {
         this.pais = pais;
     }
 
-    public int getPoblacion() {
+    public String getPoblacion() {
         return poblacion;
     }
 
-    public void setPoblacion(int poblacion) {
+    public void setPoblacion(String poblacion) {
         this.poblacion = poblacion;
     }
 }

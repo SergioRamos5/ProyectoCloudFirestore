@@ -5,17 +5,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-
-public class Adaptador extends FirebaseRecyclerAdapter<Ciudad,CiudadHolder> implements View.OnClickListener {
+public class Adaptador extends FirestoreRecyclerAdapter<Ciudad,CiudadHolder> implements View.OnClickListener {
 
     private View.OnClickListener listener;
 
-    public Adaptador(@NonNull FirebaseRecyclerOptions<Ciudad> options) {
+    public Adaptador(@NonNull FirestoreRecyclerOptions<Ciudad> options) {
         super(options);
+
     }
+
 
     @Override
     protected void onBindViewHolder(@NonNull CiudadHolder holder, int position, @NonNull Ciudad model) {
@@ -30,6 +31,7 @@ public class Adaptador extends FirebaseRecyclerAdapter<Ciudad,CiudadHolder> impl
         return new CiudadHolder(view);
     }
 
+    //region CLICK Listner
     void onClickListener(View.OnClickListener listener)
     {
         this.listener = listener;
@@ -40,4 +42,5 @@ public class Adaptador extends FirebaseRecyclerAdapter<Ciudad,CiudadHolder> impl
         if (listener != null)
             listener.onClick(v);
     }
+    //endregion
 }

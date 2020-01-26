@@ -1,50 +1,72 @@
 package com.example.proyectocloudfirestore;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 public class IntentPrincipal extends AppCompatActivity {
 
     RecyclerView recyclerView;
     Adaptador adaptador;
-    DatabaseReference dbPred;
-    FirebaseRecyclerOptions<Ciudad> firebaseRecyclerOptions;
-    ChildEventListener childEventListener;
-    FirebaseDatabase firebaseDatabase;
-
+    FirebaseFirestore firebaseFirestore;
+    FloatingActionButton fab;
+    int pos;
+    Ciudad ciudad;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycler_view);
 
-        dbPred = FirebaseDatabase.getInstance().getReference().child("Ciudades");
-        firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<Ciudad>().setQuery(dbPred, Ciudad.class).build();
-
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
+        Query query = firebaseFirestore.collection("Ciudades");
 
-        adaptador = new Adaptador(firebaseRecyclerOptions);
+        FirestoreRecyclerOptions<Ciudad> firestoreRecyclerOptions = new FirestoreRecyclerOptions.Builder<Ciudad>().setQuery(query, Ciudad.class).build();
+
+        adaptador = new Adaptador(firestoreRecyclerOptions);
+        adaptador.notifyDataSetChanged();
+
+        adaptador.onClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pos = recyclerView.getChildAdapterPosition(v);
+                ciudad = adaptador.getItem(pos);
+
+            }
+        });
+
         recyclerView.setAdapter(adaptador);
+
+        fab = findViewById(R.id.btFab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(IntentPrincipal.this, IntentAgregar.class);
+                startActivity(intent);
+            }
+        });
+
     }
-    @Override
+
+   /* @Override
     protected void onDestroy()
     {
         if (firebaseDatabase != null && childEventListener != null)
             firebaseDatabase.getReference("prediccion").removeEventListener(childEventListener);
         super.onDestroy();
-    }
+    }*/
 
     @Override
     protected void onStart()
