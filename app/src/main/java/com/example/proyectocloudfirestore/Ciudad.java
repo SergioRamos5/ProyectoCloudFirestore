@@ -1,6 +1,9 @@
 package com.example.proyectocloudfirestore;
 
-public class Ciudad {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Ciudad implements Parcelable {
 
     private String nombre;
     private String comunidad;
@@ -16,6 +19,25 @@ public class Ciudad {
         this.pais = pais;
         this.poblacion = poblacion;
     }
+
+    protected Ciudad(Parcel in) {
+        nombre = in.readString();
+        comunidad = in.readString();
+        pais = in.readString();
+        poblacion = in.readString();
+    }
+
+    public static final Creator<Ciudad> CREATOR = new Creator<Ciudad>() {
+        @Override
+        public Ciudad createFromParcel(Parcel in) {
+            return new Ciudad(in);
+        }
+
+        @Override
+        public Ciudad[] newArray(int size) {
+            return new Ciudad[size];
+        }
+    };
 
     public String getNombre() {
         return nombre;
@@ -47,5 +69,18 @@ public class Ciudad {
 
     public void setPoblacion(String poblacion) {
         this.poblacion = poblacion;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(nombre);
+        dest.writeString(comunidad);
+        dest.writeString(pais);
+        dest.writeString(poblacion);
     }
 }

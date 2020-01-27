@@ -35,7 +35,7 @@ public class IntentAgregar extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (!nombre.getText().toString().isEmpty() && !comunidad.getText().toString().isEmpty() &&
+                if (!abreviatura.getText().toString().isEmpty() && !nombre.getText().toString().isEmpty() && !comunidad.getText().toString().isEmpty() &&
                     !pais.getText().toString().isEmpty() && !poblaciom.getText().toString().isEmpty())
                 {
                     Ciudad c = new Ciudad(nombre.getText().toString(),comunidad.getText().toString(),pais.getText().toString(),poblaciom.getText().toString());

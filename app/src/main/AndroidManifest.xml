@@ -18,6 +18,7 @@
         </activity>
         <activity android:name=".IntentPrincipal"/>
         <activity android:name=".IntentAgregar"/>
+        <activity android:name=".IntentEditar"/>
     </application>
 
 </manifest>

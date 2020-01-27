@@ -8,10 +8,10 @@ import androidx.annotation.NonNull;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
-public class Adaptador extends FirestoreRecyclerAdapter<Ciudad,CiudadHolder> implements View.OnClickListener {
+public class Adaptador extends FirestoreRecyclerAdapter<Ciudad,CiudadHolder> implements View.OnClickListener, View.OnLongClickListener {
 
     private View.OnClickListener listener;
-
+    private View.OnLongClickListener longListener;
     public Adaptador(@NonNull FirestoreRecyclerOptions<Ciudad> options) {
         super(options);
 
@@ -28,6 +28,7 @@ public class Adaptador extends FirestoreRecyclerAdapter<Ciudad,CiudadHolder> imp
     public CiudadHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.holder, parent, false);
         view.setOnClickListener(this);
+        view.setOnLongClickListener(this);
         return new CiudadHolder(view);
     }
 
@@ -43,4 +44,16 @@ public class Adaptador extends FirestoreRecyclerAdapter<Ciudad,CiudadHolder> imp
             listener.onClick(v);
     }
     //endregion
+
+    @Override
+    public boolean onLongClick(View v) {
+        if (longListener != null)
+            longListener.onLongClick(v);
+        return false;
+    }
+
+    void onClickLongListener(View.OnLongClickListener longListener)
+    {
+        this.longListener = longListener;
+    }
 }
