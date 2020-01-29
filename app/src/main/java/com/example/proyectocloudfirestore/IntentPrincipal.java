@@ -98,6 +98,7 @@ public class IntentPrincipal extends AppCompatActivity {
         });
         //endregion
 
+        adaptador.startListening();
         recyclerView.setAdapter(adaptador);
 
         fab = findViewById(R.id.btFab);
