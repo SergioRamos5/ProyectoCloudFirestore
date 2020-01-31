@@ -35,7 +35,6 @@ public class CiudadHolder extends RecyclerView.ViewHolder {
         ref.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
         @Override
         public void onComplete(@NonNull Task<Uri> task) {
-                Uri u = task.getResult();
                 Picasso.get().load(task.getResult()).into(imagen);
             }
         });

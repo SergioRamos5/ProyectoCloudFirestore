@@ -53,6 +53,5 @@ public class IntentEditar extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 }

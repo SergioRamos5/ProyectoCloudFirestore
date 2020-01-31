@@ -23,6 +23,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_below="@id/tvUsuario"
+        android:text="sergio@gmail.com"
          />
 
     <TextView
@@ -45,6 +46,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:inputType="textPassword"
+        android:text="Srs53497"
          />
 
     <Button
